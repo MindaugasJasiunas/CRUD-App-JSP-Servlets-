@@ -111,7 +111,7 @@ public class ControllerServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    public void updateStudent(){
+    public void updateStudent(ServletRequest request, ServletResponse response) throws ServletException, IOException{
 
     }
 
