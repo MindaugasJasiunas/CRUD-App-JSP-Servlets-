@@ -57,6 +57,7 @@ public class StudentDAO {
 
 
     public List<Student> getStudents(){
+        connect();
         List<Student> students=new ArrayList<>();
         try(PreparedStatement getAllStudentsQuery=conn.prepareStatement(GET_ALL_STUDENTS_QUERY)){
             ResultSet result=getAllStudentsQuery.executeQuery();
@@ -74,11 +75,13 @@ public class StudentDAO {
         }catch (NullPointerException npe){
             npe.printStackTrace();
         }
+        disconnect(); //return connection to connection pool
         return students;
     }
 
 
     public Student getStudentById(int id){
+        connect();
         Student student=null;
         try(PreparedStatement getStudentQuery=conn.prepareStatement(GET_STUDENT_QUERY)){
             getStudentQuery.setInt(1, id);
@@ -94,55 +97,74 @@ public class StudentDAO {
         }catch (SQLException e){
             e.printStackTrace();
         }
+        disconnect();
         return student;
     }
 
 
     public boolean createStudent(String firstName, String lastName, String universityGroup, String email){
+        connect();
         try(PreparedStatement insertNewIntoStudentsQuery=conn.prepareStatement(INSERT_NEW_INTO_STUDENTS_QUERY)){
-            insertNewIntoStudentsQuery.setString(1, firstName);
-            insertNewIntoStudentsQuery.setString(2, lastName);
-            insertNewIntoStudentsQuery.setString(3, universityGroup);
-            insertNewIntoStudentsQuery.setString(4, email);
-            int executedRows=insertNewIntoStudentsQuery.executeUpdate();
-            if(executedRows==1){
-                return true;
+            Student tempStudent=new Student(0, firstName, lastName, universityGroup, email);
+            //if all fields except id is filled, add to db
+            if(tempStudent.isAllFields()){
+                insertNewIntoStudentsQuery.setString(1, firstName);
+                insertNewIntoStudentsQuery.setString(2, lastName);
+                insertNewIntoStudentsQuery.setString(3, universityGroup);
+                insertNewIntoStudentsQuery.setString(4, email);
+                int executedRows=insertNewIntoStudentsQuery.executeUpdate();
+                if(executedRows==1){
+                    return true;
+                }
             }
         }catch (SQLException e){
             e.printStackTrace();
+        }finally {
+            disconnect();
         }
         return false;
     }
 
 
     public boolean updateStudent(Student oldStudent, String firstName, String lastName, String universityGroup, String email){
+        connect();
         try(PreparedStatement updateStudentQuery=conn.prepareStatement(UPDATE_STUDENT_QUERY)){
-            int id=oldStudent.getId();
-            updateStudentQuery.setString(1, firstName);
-            updateStudentQuery.setString(2, lastName);
-            updateStudentQuery.setString(3, universityGroup);
-            updateStudentQuery.setString(4, email);
-            updateStudentQuery.setInt(5, id);
-            int updatedRows=updateStudentQuery.executeUpdate();
-            if(updatedRows==1){
-                return true;
+            Student tempStudent=new Student(0,firstName, lastName, universityGroup, email);
+            if(tempStudent.isAllFields()) {
+                int id = oldStudent.getId();
+                updateStudentQuery.setString(1, firstName);
+                updateStudentQuery.setString(2, lastName);
+                updateStudentQuery.setString(3, universityGroup);
+                updateStudentQuery.setString(4, email);
+                updateStudentQuery.setInt(5, id);
+                int updatedRows = updateStudentQuery.executeUpdate();
+                if (updatedRows == 1) {
+                    return true;
+                }
+            }else{
+                return false;
             }
         }catch (SQLException e){
             e.printStackTrace();
+        }finally {
+            disconnect();
         }
         return false;
     }
 
 
-    public boolean deleteStudent(Student student){
+    public boolean deleteStudent(int id){
+        connect();
         try(PreparedStatement deleteStudentQuery=conn.prepareStatement(DELETE_STUDENT_QUERY)){
-            deleteStudentQuery.setInt(1,student.getId());
+            deleteStudentQuery.setInt(1,id);
             int deletedRows=deleteStudentQuery.executeUpdate();
             if(deletedRows==1){
                 return true;
             }
         }catch (SQLException e){
             e.printStackTrace();
+        }finally {
+            disconnect();
         }
         return false;
     }

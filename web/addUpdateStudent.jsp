@@ -21,16 +21,18 @@
         }
     </style>
     <body>
-        <h2> Add/Update student </h2> <br>
-        <form action="StudentManagementAddUpdateServlet" method="POST">
+        <h2> ${AddOrUpdate} student </h2> <br>
+        ${errorCode}<br>
+        <form action="ControllerServlet?action=${addupdate}" method="POST">
+            <input hidden type="text" name="id" value="${id}"><br>
             <label for="firstname">First name:</label><br>
-            <input type="text" id="firstname" name="firstname" value="John"><br>
+            <input type="text" id="firstname" name="firstname" value="${firstName}"><br>
             <label for="lastname">Last name:</label><br>
-            <input type="text" id="lastname" name="lastname" value="Doe"><br>
+            <input type="text" id="lastname" name="lastname" value="${lastName}"><br>
             <label for="universityGroup">University group:</label><br>
-            <input type="text" id="universityGroup" name="universityGroup" value="IT4"><br>
+            <input type="text" id="universityGroup" name="universityGroup" value="${universityGroup}"><br>
             <label for="email">Email:</label><br>
-            <input type="text" id="email" name="email" value="email@example.com"><br><br>
+            <input type="text" id="email" name="email" value="${email}"><br><br>
             <input type="submit" class="button" value="Submit">
         </form>
     </body>

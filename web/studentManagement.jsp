@@ -26,7 +26,7 @@
         background-color: #dddddd;
     }
 
-    button {
+    .button {
         background-color: #008CBA; /* Blue */
         border: none;
         color: white;
@@ -41,7 +41,7 @@
 
 <h2> Student management </h2>
 
-<a href="addUpdateStudent.jsp" type="button">Add student</a>
+<a href="ControllerServlet?action=addNewStudent" class="button">Add student</a>
 
 <table>
     <tr>
@@ -58,23 +58,16 @@
             <td>${student.universityGroup}</td>
             <td>${student.email}</td>
             <td>
-                <a href="">Update</a> |
-                <a href="">Delete</a>
+                <a href="ControllerServlet?action=updateStudent&id=${student.id}">Update</a> |
+                <%-- prompt message to delete --%>
+                <a href="ControllerServlet?action=deleteStudent&id=${student.id}">Delete</a>
             </td>
         </tr>
     </c:forEach>
-    <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>IT4</td>
-        <td>john.doe@example.com</td>
-        <td>
-            <a href="">Update</a> |
-            <a href="">Delete</a>
-        </td>
-    </tr>
 </table>
 ${test}
 
 </body>
 </html>
+
+<%--JSP, Servlets using MVC logic, JSTL library, JDBC using Postgresql, Hikari for connection pool--%>

@@ -10,7 +10,7 @@
 <html>
 <jsp:include page="header.jsp"/>
   <body>
-    <a href="studentManagement">Student management</a>
+    <a href="ControllerServlet">Student management</a>
     <a href="addUpdateStudent.jsp">Student add/update</a>
   </body>
 </html>
