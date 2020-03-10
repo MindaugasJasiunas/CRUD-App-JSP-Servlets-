@@ -59,14 +59,21 @@
             <td>${student.email}</td>
             <td>
                 <a href="ControllerServlet?action=updateStudent&id=${student.id}">Update</a> |
-                <%-- prompt message to delete --%>
-                <a href="ControllerServlet?action=deleteStudent&id=${student.id}">Delete</a>
+                <a onclick="return confirm('Are you sure, you want to delete it?')" href="ControllerServlet?action=deleteStudent&id=${student.id}">Delete</a>
             </td>
         </tr>
     </c:forEach>
 </table>
 ${test}
 
+<script>
+    function myFunction(name) {
+        wantToDelete=confirm("Do you really want to delete "+name+"?");
+        if(wantToDelete){
+            window.location.href = 'ControllerServlet?action=deleteStudent&id=${student.id}';
+        }
+    }
+</script>
 </body>
 </html>
 
