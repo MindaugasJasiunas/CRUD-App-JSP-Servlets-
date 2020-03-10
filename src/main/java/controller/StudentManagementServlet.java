@@ -36,9 +36,9 @@ public class StudentManagementServlet extends HttpServlet {
         }
 
         //add students attribute and forward to jsp
-/*        request.setAttribute("students", studentList);
-        RequestDispatcher dispatcher=request.getRequestDispatcher("/index.jsp");
-        dispatcher.forward(request, response);*/
+        request.setAttribute("students", studentList);
+        RequestDispatcher dispatcher=request.getRequestDispatcher("/studentManagement.jsp");
+        dispatcher.forward(request, response);
     }
 
 }

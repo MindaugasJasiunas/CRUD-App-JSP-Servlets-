@@ -41,7 +41,7 @@
 
 <h2> Student management </h2>
 
-<button>Add student</button>
+<a href="addUpdateStudent.jsp" type="button">Add student</a>
 
 <table>
     <tr>
