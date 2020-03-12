@@ -19,12 +19,26 @@
             display: inline-block;
             font-size: 16px;
         }
+        input[type=text], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type=hidden], select {
+            visibility: hidden;
+        }
+
+
     </style>
     <body>
         <h2> ${AddOrUpdate} student </h2> <br>
         ${errorCode}<br>
         <form action="ControllerServlet?action=${addupdate}" method="POST">
-            <input hidden type="text" name="id" value="${id}"><br>
+            <input hidden type="hidden" name="id" value="${id}"><br>
             <label for="firstname">First name:</label><br>
             <input type="text" id="firstname" name="firstname" value="${firstName}"><br>
             <label for="lastname">Last name:</label><br>
