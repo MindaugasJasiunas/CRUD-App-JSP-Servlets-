@@ -64,17 +64,7 @@
         </tr>
     </c:forEach>
 </table>
-${test}
 
-<script>
-    function myFunction(name) {
-        wantToDelete=confirm("Do you really want to delete "+name+"?");
-        if(wantToDelete){
-            window.location.href = 'ControllerServlet?action=deleteStudent&id=${student.id}';
-        }
-    }
-</script>
+
 </body>
 </html>
-
-<%--JSP, Servlets using MVC logic, JSTL library, JDBC using Postgresql, Hikari for connection pool--%>
