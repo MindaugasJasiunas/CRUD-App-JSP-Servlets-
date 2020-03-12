@@ -15,3 +15,7 @@ alter table students
 create unique index students_id_uindex
     on students (id);
 
+INSERT INTO public.students (id, firstname, lastname, universitygroup, email) VALUES (1, 'Tim', 'Testy', 'IT4', 'tim@example.com');
+INSERT INTO public.students (id, firstname, lastname, universitygroup, email) VALUES (33, 'Jane', 'Doe', 'KF5', 'janedoe@example.com');
+INSERT INTO public.students (id, firstname, lastname, universitygroup, email) VALUES (32, 'Test', 'Testy', 'T1', 'test@example.com');
+INSERT INTO public.students (id, firstname, lastname, universitygroup, email) VALUES (5, 'John', 'Doe', 'IT5', 'johndoe@example.com');
